@@ -39,8 +39,15 @@ jobs:
       - name: Build
         run: castor release
 
+      - name: Install cargo-about
+        run: cargo install --locked cargo-about --version 0.9.3 --features cli
+
+      - name: Generate the third party licenses
+        run: castor licenses
+
       - name: Package
         run: |
+          cp LICENSE dist/
           cd dist
           mv shiki-rs-cli "$ASSET"
           ./"$ASSET" --list-themes > /dev/null

@@ -5,13 +5,19 @@ defined('CASTOR_USE_CHDIR') || define('CASTOR_USE_CHDIR', true);
 use Castor\Attribute\AsRawTokens;
 use Castor\Attribute\AsTask;
 
+use function Castor\capture;
 use function Castor\fs;
+use function Castor\http_request;
 use function Castor\io;
 use function Castor\run;
 
 const RELEASE_TARGET = 'x86_64-unknown-linux-musl';
 const BINARY = 'shiki-rs-cli';
 const DIST_BINARY = __DIR__ . '/dist/' . BINARY;
+const DIST_LICENSES = __DIR__ . '/dist/THIRD_PARTY_LICENSES.txt';
+// Commit of shikijs/textmate-grammars-themes embedded by giallo: the `grammars-themes`
+// submodule of the giallo tag matching Cargo.lock. Update it when upgrading giallo.
+const GRAMMARS_THEMES_COMMIT = '8f1828ebccc57930cf0adde9b35ae929584fe191';
 
 #[AsTask(description: 'Install the Rust target needed for the static release binary')]
 function setup(): void
@@ -65,6 +71,40 @@ function check(): void
     run(['cargo', 'fmt', '--check']);
     lint();
     test();
+}
+
+#[AsTask(description: 'Generate dist/THIRD_PARTY_LICENSES.txt for the release binary (needs cargo-about)')]
+function licenses(): void
+{
+    $grammarsThemesUrl = 'https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/' . GRAMMARS_THEMES_COMMIT . '/packages/';
+
+    $sections = [
+        <<<'TXT'
+            Third party licenses
+            ====================
+
+            shiki-rs-cli is MIT licensed (see LICENSE). Its release binary also embeds the
+            third party software listed below, under their own licenses.
+
+            giallo is licensed under the EUPL-1.2. Its source code is available at
+            https://github.com/getzola/giallo and https://crates.io/crates/giallo.
+            TXT,
+        capture(['cargo', 'about', 'generate', '--locked', 'about.hbs']),
+    ];
+
+    foreach (['tm-grammars' => 'TextMate grammars', 'tm-themes' => 'Themes'] as $package => $title) {
+        $sections[] = sprintf(
+            "%s from Shiki\n%s\n\nFrom %s\n\n%s\n%s",
+            $title,
+            str_repeat('=', \strlen($title) + 11),
+            'https://github.com/shikijs/textmate-grammars-themes/tree/' . GRAMMARS_THEMES_COMMIT . '/packages/' . $package,
+            http_request('GET', $grammarsThemesUrl . $package . '/LICENSE')->getContent(),
+            http_request('GET', $grammarsThemesUrl . $package . '/NOTICE')->getContent(),
+        );
+    }
+
+    fs()->dumpFile(DIST_LICENSES, implode("\n\n", array_map('trim', $sections)) . "\n");
+    io()->success(sprintf('Generated %s (%d KiB)', 'dist/' . basename(DIST_LICENSES), filesize(DIST_LICENSES) / 1024));
 }
 
 #[AsTask(description: 'Remove build artifacts')]

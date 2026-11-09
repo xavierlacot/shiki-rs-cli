@@ -1,0 +1,13 @@
+# cargo-about configuration, used by `castor licenses`
+accepted = [
+    "Apache-2.0",
+    "BSD-3-Clause",
+    "EUPL-1.2",
+    "MIT",
+    "Unicode-3.0",
+    "Unlicense",
+    "Zlib",
+]
+targets = ["x86_64-unknown-linux-musl"]
+ignore-build-dependencies = true
+ignore-dev-dependencies = true

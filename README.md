@@ -75,9 +75,12 @@ castor qa:fmt     # format the code
 castor qa:lint    # clippy
 castor qa:check   # formatting check, clippy and tests
 castor release    # static release binary in dist/shiki-rs-cli
+castor licenses   # third party licenses in dist/THIRD_PARTY_LICENSES.txt
 castor clean
 ```
 
 ## License
 
-This project is MIT licensed. It embeds giallo, which is licensed under the [EUPL-1.2](https://eupl.eu/1.2/en/).
+The source code of this project is MIT licensed, see [LICENSE](LICENSE).
+
+The release binaries also embed third party software under their own licenses: [giallo](https://github.com/getzola/giallo) (licensed under the [EUPL-1.2](https://eupl.eu/1.2/en/)), other Rust crates, and Shiki's [grammars and themes](https://github.com/shikijs/textmate-grammars-themes). Their licenses and notices are listed in the `THIRD_PARTY_LICENSES.txt` file attached to each release, which `castor licenses` generates (it requires [cargo-about](https://github.com/EmbarkStudios/cargo-about): `cargo install --locked cargo-about --features cli`).
