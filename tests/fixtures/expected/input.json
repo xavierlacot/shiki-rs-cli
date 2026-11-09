@@ -1,0 +1,21 @@
+[
+  {
+    "lang": "typescript",
+    "input": "function greet(): void {\n  console.log('Hello, world!');\n}\ngreet();",
+    "reference": "550e8400-e29b-41d4-a716-446655440004",
+    "output": "<pre class=\"shiki monokai\" style=\"background-color:#1f2937;color:#F8F8F2\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#66D9EF;font-style:italic\">function</span><span style=\"color:#A6E22E\"> greet</span><span style=\"color:#F8F8F2\">()</span><span style=\"color:#F92672\">:</span><span style=\"color:#66D9EF;font-style:italic\"> void</span><span style=\"color:#F8F8F2\"> {</span></span>\n<span class=\"line\"><span style=\"color:#F8F8F2\">  console.</span><span style=\"color:#A6E22E\">log</span><span style=\"color:#F8F8F2\">(</span><span style=\"color:#E6DB74\">'Hello, world!'</span><span style=\"color:#F8F8F2\">);</span></span>\n<span class=\"line\"><span style=\"color:#F8F8F2\">}</span></span>\n<span class=\"line\"><span style=\"color:#A6E22E\">greet</span><span style=\"color:#F8F8F2\">();</span></span></code></pre>"
+  },
+  {
+    "lang": "php",
+    "theme": "github-dark",
+    "input": "<?php\nfunction greet() {\n  echo 'Hello, world!';\n}\ngreet();\n?>",
+    "reference": "550e8400-e29b-41d4-a716-446655440005",
+    "output": "<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#F97583\">&#x3C;?</span><span style=\"color:#79B8FF\">php</span></span>\n<span class=\"line\"><span style=\"color:#F97583\">function</span><span style=\"color:#B392F0\"> greet</span><span style=\"color:#E1E4E8\">() {</span></span>\n<span class=\"line\"><span style=\"color:#79B8FF\">  echo</span><span style=\"color:#9ECBFF\"> 'Hello, world!'</span><span style=\"color:#E1E4E8\">;</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">}</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">greet</span><span style=\"color:#E1E4E8\">();</span></span>\n<span class=\"line\"><span style=\"color:#F97583\">?></span></span></code></pre>"
+  },
+  {
+    "lang": "not-a-language",
+    "input": "plain <text>",
+    "reference": "550e8400-e29b-41d4-a716-446655440006",
+    "output": "<pre class=\"shiki monokai\" style=\"background-color:#1f2937;color:#F8F8F2\" tabindex=\"0\"><code><span class=\"line\"><span>plain &#x3C;text></span></span></code></pre>"
+  }
+]

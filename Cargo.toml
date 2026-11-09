@@ -1,0 +1,23 @@
+[package]
+name = "shiki-rs-cli"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "A standalone command line syntax highlighter producing Shiki-compatible HTML, powered by giallo"
+license = "MIT"
+repository = "https://github.com/xavierlacot/shiki-rs-cli"
+readme = "README.md"
+keywords = ["shiki", "syntax-highlighting", "textmate", "cli", "html"]
+categories = ["command-line-utilities", "text-processing"]
+publish = false
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+giallo = { version = "0.6", features = ["dump"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+panic = "abort"
+strip = true

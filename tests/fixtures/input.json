@@ -1,0 +1,18 @@
+[
+	{
+		"lang": "typescript",
+		"input": "function greet(): void {\n  console.log('Hello, world!');\n}\ngreet();",
+		"reference": "550e8400-e29b-41d4-a716-446655440004"
+	},
+	{
+		"lang": "php",
+		"theme": "github-dark",
+		"input": "<?php\nfunction greet() {\n  echo 'Hello, world!';\n}\ngreet();\n?>",
+		"reference": "550e8400-e29b-41d4-a716-446655440005"
+	},
+	{
+		"lang": "not-a-language",
+		"input": "plain <text>",
+		"reference": "550e8400-e29b-41d4-a716-446655440006"
+	}
+]
